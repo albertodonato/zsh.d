@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 
-fpath += ( $(realpath "$(dirname "${(%):-%x}")")/autoload )
+fpath+=( $(realpath $(dirname ${(%):-%x}))/autoload )
 
 # emacs-style bindings
 bindkey -e
