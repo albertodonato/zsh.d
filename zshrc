@@ -26,7 +26,10 @@ zmodload zsh/complist
 _comp_options+=(globdots)
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*:paths' matcher-list \
+    'm:{a-z}={A-Z}' \
+    'r:|[._-]=* r:|=*' \
+    'l:|=* r:|=*'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
