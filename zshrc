@@ -59,4 +59,4 @@ zstyle ':vcs_info:git:*' actionformats ' %b(%i)|%a %u%c'
 local newline=$'\n'
 PROMPT="%F{8}┌─╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
 PROMPT+="${newline}%F{8}└─╼%f "
-RPROMPT="%(?.%F{green}🗸.%F{red}%? ✗)%f"
+RPROMPT="%(?.%F{green}✔.%F{red}%? ✖)%f"
