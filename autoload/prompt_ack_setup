@@ -19,10 +19,10 @@ function prompt_ack_setup() {
         extended)
             local newline=$'\n'
 
+            setopt PROMPT_SUBST
             PROMPT="%F{8}┌─╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
             PROMPT+="${newline}%F{8}└─╼%f "
             RPROMPT="%(?.%F{green}✔.%F{red}%? ✖)%f"
-            setopt PROMPT_SUBST
             ;;
         *)
             echo "Unknown prompt type" >&2
