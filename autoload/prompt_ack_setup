@@ -1,5 +1,7 @@
 # -*- mode: sh -*-
 
+typeset -g PROMPT RPROMPT
+
 function prompt_ack_setup() {
     local type=${1:-extended}
 
