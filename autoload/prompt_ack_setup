@@ -1,0 +1,66 @@
+# -*- mode: sh -*-
+
+function prompt_ack_setup() {
+    local type=${1:-extended}
+
+    case $type in
+        nocolor)
+            PROMPT='%n@%m %~ %# '
+            unset RPROMPT
+            ;;
+        basic)
+            PROMPT='%F{8}%#%f '
+            unset RPROMPT
+            ;;
+        oneline)
+            PROMPT="%F{cyan}%n%F{blue}@%m%f %F{green}%~%f %F{8}%#%f "
+            unset RPROMPT
+            ;;
+        extended)
+            local newline=$'\n'
+
+            PROMPT="%F{8}┌─╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
+            PROMPT+="${newline}%F{8}└─╼%f "
+            RPROMPT="%(?.%F{green}✔.%F{red}%? ✖)%f"
+            setopt PROMPT_SUBST
+            ;;
+        *)
+            echo "Unknown prompt type" >&2
+            return 1
+            ;;
+    esac
+}
+
+function prompt_ack_help() {
+    cat <<EOF
+Prompt with multiline support.
+
+The following modes are supported:
+
+- basic: just the prompt sign
+
+- oneline: colored single line prompt
+
+- nocolor: same as oneline, but without colors
+
+- extended (default): mutiline
+  * user and host name
+  * current path
+  * VCS status info
+  * return code from previous command
+EOF
+}
+
+function prompt_ack_preview() {
+    local mode=$1
+
+    local modes=(nocolor basic oneline extended)
+
+    if [ $mode ]; then
+        prompt_preview_theme ack $mode
+    else
+        for mode in $modes; do
+            prompt_preview_theme ack $mode
+        done
+    fi
+}

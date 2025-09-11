@@ -43,7 +43,7 @@ zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 autoload -U select-word-style && select-word-style bash
 
 # prompt
-setopt PROMPT_SUBST
+autoload -Uz promptinit && promptinit
 
 autoload -Uz vcs_info
 precmd_functions+=( vcs_info )
@@ -56,7 +56,4 @@ zstyle ':vcs_info:git:*' get-revision true
 zstyle ':vcs_info:git:*' formats       ' %b(%8.8i) %u%c'
 zstyle ':vcs_info:git:*' actionformats ' %b(%i)|%a %u%c'
 
-local newline=$'\n'
-PROMPT="%F{8}┌─╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
-PROMPT+="${newline}%F{8}└─╼%f "
-RPROMPT="%(?.%F{green}✔.%F{red}%? ✖)%f"
+prompt ack
