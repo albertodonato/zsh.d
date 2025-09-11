@@ -44,16 +44,4 @@ autoload -U select-word-style && select-word-style bash
 
 # prompt
 autoload -Uz promptinit && promptinit
-
-autoload -Uz vcs_info
-precmd_functions+=(vcs_info)
-
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '%F{green}●%f'
-zstyle ':vcs_info:*' unstagedstr '%F{red}●%f'
-zstyle ':vcs_info:git:*' get-revision true
-zstyle ':vcs_info:git:*' formats ' %b(%8.8i) %u%c'
-zstyle ':vcs_info:git:*' actionformats ' %b(%i)|%a %u%c'
-
 prompt ack

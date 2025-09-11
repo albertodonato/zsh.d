@@ -1,37 +1,46 @@
 # -*- mode: sh -*-
 
-typeset -g PROMPT RPROMPT
+autoload -Uz vcs_info
+precmd_functions+=(vcs_info)
 
-function prompt_ack_setup() {
-    local type=${1:-extended}
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '%F{green}●%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}●%f'
+zstyle ':vcs_info:git:*' get-revision true
+zstyle ':vcs_info:git:*' formats ' %b(%8.8i) %u%c'
+zstyle ':vcs_info:git:*' actionformats ' %b(%i)|%a %u%c'
 
-    case $type in
-        nocolor)
-            PROMPT='%n@%m %~ %# '
-            unset RPROMPT
-            ;;
-        basic)
-            PROMPT='%F{8}%#%f '
-            unset RPROMPT
-            ;;
-        oneline)
-            PROMPT="%F{cyan}%n%F{blue}@%m%f %F{green}%~%f %F{8}%#%f "
-            unset RPROMPT
-            ;;
-        extended)
-            local newline=$'\n'
+local type=${1:-extended}
 
-            setopt PROMPT_SUBST
-            PROMPT="%F{8}┌─╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
-            PROMPT+="${newline}%F{8}└─╼%f "
-            RPROMPT="%(?.%F{green}✔.%F{red}%? ✖)%f"
-            ;;
-        *)
-            echo "Unknown prompt type" >&2
-            return 1
-            ;;
-    esac
-}
+case $type in
+    nocolor)
+        PROMPT='%n@%m %~ %# '
+        unset RPROMPT
+        ;;
+    basic)
+        PROMPT='%F{8}%#%f '
+        unset RPROMPT
+        ;;
+    oneline)
+        PROMPT="%F{cyan}%n%F{blue}@%m%f %F{green}%~%f %F{8}%#%f "
+        unset RPROMPT
+        ;;
+    extended)
+        local newline=$'\n'
+
+        prompt_opts=(percent subst)
+        PROMPT="%F{8}┌─╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
+        PROMPT+="${newline}%F{8}└─╼%f "
+        RPROMPT="%(?.%F{green}✔.%F{red}%? ✖)%f"
+        ;;
+    *)
+        echo "Unknown prompt type" >&2
+        return 1
+        ;;
+esac
+
+
 
 function prompt_ack_help() {
     cat <<EOF
