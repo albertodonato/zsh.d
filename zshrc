@@ -31,6 +31,7 @@ zstyle ':completion:*' matcher-list \
     'r:|[._-]=* r:|=*' \
     'l:|=* r:|=*'
 zstyle ':completion:*' group-name ''
+zstyle ':completion:*:paths' special-dirs true
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
