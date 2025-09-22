@@ -30,8 +30,8 @@ case $type in
         local newline=$'\n'
 
         prompt_opts=(percent subst)
-        PROMPT="%F{8}┌─╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
-        PROMPT+="${newline}%F{8}└─╼%f "
+        PROMPT="%F{8}┌╼ %F{cyan}%n%F{blue}@%m%f  %F{green}%~%f  %F{yellow}\${vcs_info_msg_0_}%f"
+        PROMPT+="${newline}%F{8}└╼%f "
         RPROMPT="%(?.%F{green}✔.%F{red}%? ✖)%f"
         ;;
     *)
