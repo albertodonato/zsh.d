@@ -5,6 +5,9 @@ fpath+=( $(realpath $(dirname ${(%):-%x}))/autoload )
 # emacs-style bindings
 bindkey -e
 
+# general options
+setopt AUTOCD
+
 # history
 setopt HIST_FCNTL_LOCK
 setopt APPEND_HISTORY
